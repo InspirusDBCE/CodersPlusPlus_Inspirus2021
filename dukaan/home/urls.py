@@ -22,7 +22,7 @@ app_name = "home"
 
 urlpatterns = [
     path('checkout/', views.checkout, name="Checkout"),
-    path('', views.home_page),
+    path('', views.home_page, name='homepage'),
     path('chart/', views.chart),
     path('additem/', views.test),
 ]

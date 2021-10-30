@@ -16,6 +16,7 @@ function getItemsFromCart() {
 
 function clearLocalStorage() {
     localStorage.setItem('itemincart', '');
+    alert('Order Placed');
 }
 console.log(getItemsFromCart())
 

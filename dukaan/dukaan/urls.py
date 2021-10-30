@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('additems/', views.display_items),
     path('', include(home_urls)),
+    path('user/', include('django.contrib.auth.urls')),
     path('userreg/', include(urls)),
 ]

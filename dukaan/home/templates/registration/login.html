@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <h1>Login</h1>
+        {% csrf_token %}
+        <div>
+            <label for="{{form.username.id_for_label}}">User Name: </label>
+            <span class="username">{{ form.username }}</span>
+        </div>
+        <div>
+            <label for="{{form.password.id_for_label}}">Password: </label>
+            <span class="password">{{ form.password }}</span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

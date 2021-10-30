@@ -6,7 +6,15 @@
 {% endblock %}
 
 {% block content %}
+    <div>
+        {% for fields, errors in form.errors.items %}
+            {% for error in errors %}
+                <p>{{fields}} - {{error}}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
     <form method="post">
+        <h1>Sign Up</h1>
         {% csrf_token %}
         <label for="{{form.username.id_for_label}}">User Name: </label>
         <span class="username">{{ form.username }}</span><br>
@@ -16,6 +24,11 @@
         <span class="password">{{ form.password2 }}</span><br>
         <label for="{{form.email.id_for_label}}">Email: </label>
         <span class="email">{{form.email }}</span><br>
+        <label for="{{form.first_name.id_for_label}}">First Name: </label>
+        <span class="email">{{form.first_name }}</span><br>
+        <label for="{{form.last_name.id_for_label}}">Last Name: </label>
+        <span class="email">{{form.last_name }}</span><br>
         <button type="submit">Submit</button>
+        <p>Already have an account? <a href="/user/login">Login</a></p>
     </form>
 {% endblock %}

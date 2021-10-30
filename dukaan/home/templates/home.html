@@ -20,10 +20,16 @@
             <li><a href="#">Generate/Retreive Invoice</a></li>
             <li><a href="{% url 'home:Checkout' %}"><i id="cart" class="fas fa-shopping-cart"></i> My Cart</a></li>
         </ul>
-        <div class="profile">
-            <a href="#"><img src="{% static 'home/saisameer.jpg' %}" alt="DP"></a>
-            <div>Sai Lolla</div>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="profile">
+                <a href="#"><img src="{% static 'home/default.jpg' %}" alt="DP"></a>
+                <div>{{ user.username }} <a href="/user/logout">Logout</a></div>
+            </div>
+        {% else %}
+            <ul>
+                <li><a href="/user/login">Login</a></li>
+            </ul>
+        {% endif %}
     </nav>
     <div class="searchbar container">
         <div class="searchbardiv">

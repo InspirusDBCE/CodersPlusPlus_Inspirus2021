@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/index.css' %}">
+    <link rel="stylesheet" href="{% static 'home/utilities.css' %}">
+{% endblock %}
+
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 {% endblock %}
 
 {% block content %}
+    <nav class="container">
+        <span class="brand">Dukaan</span>
+        <ul>
+            <li><a href="#">Inventory</a></li>
+            <li><a href="#">Calculate Income</a></li>
+            <li><a href="#">Pending Payments</a></li>
+            <li><a href="#">Generate/Retreive Invoice</a></li>
+            <!-- <li><a href="{% url 'home:Checkout' %}"><i id="cart" class="fas fa-shopping-cart"></i> My Cart</a></li> -->
+        </ul>
+        {% if user.is_authenticated %}
+            <div class="profile">
+                <a href="#"><img src="{% static 'home/default.jpg' %}" alt="DP"></a>
+                <div>{{ user.username }} <a href="/user/logout">Logout</a></div>
+            </div>
+        {% else %}
+            <ul>
+                <li><a href="/user/login">Login</a></li>
+            </ul>
+        {% endif %}
+    </nav>
     <div>
         {{ profit }}<hr>
         {% for item in pending_payments %}
@@ -23,7 +49,7 @@
     <canvas id="myChart" width="800" height="200"></canvas> 
     <script defer>
         var ctx = document.getElementById('myChart');
-        <!-- var sales_full = {{ list }} -->
+        // <!-- var sales_full = {{ list }} -->
         var sales = {{ list_by_month }}
         
         // alert(sales)

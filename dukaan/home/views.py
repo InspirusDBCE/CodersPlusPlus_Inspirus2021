@@ -1,13 +1,14 @@
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 # from reportlab.platypus.doctemplate import SimpleDocTemplate
 from .models import Invoice, Item, Quantity
 from .forms import InvoiceForm, ItemForm
 import datetime
 import calendar
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required
 def test(request):
     form = ItemForm(None)
     if request.method == 'POST':
@@ -22,6 +23,7 @@ def test(request):
 
 
 list_of_products = {}
+@login_required
 def display_items(request):
     form = InvoiceForm()
     list_of_items = Item.objects.all()
@@ -72,6 +74,7 @@ def return_items_by_key(search_key):
     return item_list
 
 
+@login_required
 def home_page(request):
     print(get_popular_item_from_itemset(Item.objects.all()))
     context_dict = {
@@ -112,33 +115,35 @@ def checkout(request):
             # print(form_data)
     return render(request, 'checkout.html')
 
+@login_required
 def chart(request):
-    list_passed = list(Quantity.objects.all())
-    month_dict = {}
-    current_month = datetime.datetime.now().month
-    for i in range(1, current_month+1):
-        month_dict[calendar.month_name[i]] = 0
-    for quantity in list_passed:
-        month_dict[calendar.month_name[quantity.invoice_selected.date.month]]+=quantity.quantity
+    if request.user.is_superuser:
+        list_passed = list(Quantity.objects.all())
+        month_dict = {}
+        current_month = datetime.datetime.now().month
+        for i in range(1, current_month+1):
+            month_dict[calendar.month_name[i]] = 0
+        for quantity in list_passed:
+            month_dict[calendar.month_name[quantity.invoice_selected.date.month]]+=quantity.quantity
 
-    list_str_by_month = "[" + ",".join([str(month_dict[i]) for i in month_dict.keys()]) + "]"
+        list_str_by_month = "[" + ",".join([str(month_dict[i]) for i in month_dict.keys()]) + "]"
 
-    # list_str = "[" + ",".join([str(i.quantity) for i in list_passed]) + "]"
-    # print(list_str)
-    # month_list = []
-    print(Invoice.objects.all())
-    for i in Invoice.objects.all():
-        print(i.date.month)
-        month_list = set(calendar.month_name[i.date.month])
-        print(month_list)
-    
-    
-    
-    profit = 0
-    for item in Invoice.objects.all():
-        profit+= item.total_price
-    pending_payment = []
-    for item in Invoice.objects.all():
-        if item.payment_status==False:
-            pending_payment.append(item)
-    return render(request, 'chart.html', { "profit": profit, "pending_payments": pending_payment, "list_by_month": list_str_by_month})
+        # list_str = "[" + ",".join([str(i.quantity) for i in list_passed]) + "]"
+        # print(list_str)
+        # month_list = []
+        print(Invoice.objects.all())
+        for i in Invoice.objects.all():
+            print(i.date.month)
+            month_list = set(calendar.month_name[i.date.month])
+            print(month_list)
+
+        profit = 0
+        for item in Invoice.objects.all():
+            profit+= item.total_price
+        pending_payment = []
+        for item in Invoice.objects.all():
+            if item.payment_status==False:
+                pending_payment.append(item)
+        return render(request, 'chart.html', { "profit": profit, "pending_payments": pending_payment, "list_by_month": list_str_by_month})
+    else:
+        return HttpResponse("You are not authorised to access this page.")
