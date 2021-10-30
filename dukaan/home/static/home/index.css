@@ -1,0 +1,132 @@
+header, section, footer, nav, aside, article, main, figure {
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+*, *::after, *::before {
+    font-family: 'Calibri', Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+nav {
+    background: #4d8ae5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.brand {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: bold;
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+nav img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+nav li a {
+    display: block;
+    text-decoration: none;
+    color: rgba(250, 250, 250, 1);
+    /* font-size: 0.9rem; */
+}
+.profile {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.profile div {
+    color:rgba(250, 250, 250, 1);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#cart {
+    color: white;
+}
+
+.searchbar {
+    background: #ddd;
+}
+.searchbardiv {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+.searchbardiv svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 1.4rem;
+    transform: translateY(-50%);
+}
+.searchbardiv input {
+    width: 100%;
+    padding: .5rem 1rem;
+    padding-left: 3rem;
+    display: block;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.item {
+    width: 300px;
+    box-shadow: 2px 2px 4px gray;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    max-width: 100%;
+}
+.item-body {
+    padding: 1rem;
+}
+.itemprice {
+    font-size: 1.2rem;
+    margin: 1rem;
+    text-align: right;
+    /* font-weight: bold; */
+}
+.item-body input {
+    /* padding: .5rem 1rem; */
+    width: 10ch;
+    font-size: 1.1rem;
+    margin-left: .4rem;
+}
+.item-head {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    /* font-family: ; */
+}
+.item button {
+    width: 100%;
+    padding: .5rem .75rem;
+    cursor: pointer;
+    border: none;
+    font-size: 1.1rem;
+    background: orange;
+}
+
+.rankingsHead {
+    margin-top: clamp(2rem, 10vh, 5rem);
+}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'home/checkout.js' %}" defer></script>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/checkout.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'home/utilities.css' %}"> -->
+{% endblock %}
+{% block content %}
+    <h1>Your Cart</h1>
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price per item</th>
+            <th>Price</th>
+        </tr>
+    </table>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="itemname" id="itemname">
+            <input type="number" name="itemqty" id="itemqty">
+            <input type="number" name="itemprice" id="itemprice">
+        </div>
+        <button type="submit" onclick="clearLocalStorage()" id="checkoutbtn">Check Out</button>
+        <button type="button" id="print">Print Receipt</button>
+    </form>
+{% endblock %}

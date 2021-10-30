@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Calibri', Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    background: rgb(100, 131, 226);
+    border-radius: 1rem;
+    padding: 1.4rem 1rem;
+}
+button[type="submit"] {
+    padding: .5rem .75rem;
+    border: none;
+    background: #ddd;
+    border-radius: 8px;
+    display: inline-block;
+    width: 80%;
+    margin: 10px auto;
+}
+input {
+    margin: .5rem .35rem;
+}

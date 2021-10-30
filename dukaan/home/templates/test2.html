@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        document.getElementById("cartbutton").style.display="none";
+
+        function showquan()
+        {
+            document.getElementById("itemnames").value = document.getElementById("itemname").innerText;
+            document.getElementById("quantityform").style.display="";
+        }
+        function getitemname()
+        {
+            alert(document.getElementById("itemname").innerText);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        {% for item in list %}
+            <div style="border: 2px solid black;">
+                Name: <div id="itemname">{{ item.name }}</div><br>
+                Price: &#8377;{{ item.selling_price }}<br>
+                <button id="cartbutton" onClick=showquan()>Add to Cart</button>
+                <form type="submit" id="quantityform" style="display:none" method="get">
+                    <input type="hidden" name="itemnames" id="itemnames">
+                    <input type="number" name="productquantity">
+                    <button type="submit" onClick=getitemname()>Submit</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <form method="post">
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

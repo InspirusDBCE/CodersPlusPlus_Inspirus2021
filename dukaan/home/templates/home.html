@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/index.css' %}">
+    <link rel="stylesheet" href="{% static 'home/utilities.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'home/home.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <nav class="container">
+        <span class="brand">Dukaan</span>
+        <ul>
+            <!-- <li><a href="#">Inventory</a></li> -->
+            <!-- <li><a href="#">Calculate Income</a></li> -->
+            <li><a href="#">Pending Payments</a></li>
+            <li><a href="#">Generate/Retreive Invoice</a></li>
+            <li><a href="{% url 'home:Checkout' %}"><i id="cart" class="fas fa-shopping-cart"></i> My Cart</a></li>
+        </ul>
+        <div class="profile">
+            <a href="#"><img src="{% static 'home/saisameer.jpg' %}" alt="DP"></a>
+            <div>Sai Lolla</div>
+        </div>
+    </nav>
+    <div class="searchbar container">
+        <div class="searchbardiv">
+            <form method="get">
+                <i class="fas fa-search"></i>
+                <input type="text" name="searchbar" id="searchbar" placeholder="Start typing...">
+                <button type="submit" style="display: none;">Search</button>
+            </form>
+        </div>
+    </div>
+    <section class="itemssection container">
+        {% if items_list %}
+            <h1>Search Results</h1>
+            <div class="items">
+                {% for item_name, qty in items_list.items %}
+                    <div class="item">
+                        <div class="pic">
+                            <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                        </div>
+                        <div class="item-body">
+                            <h2 class="item-head">{{ item_name }}</h2>
+                            {% if item_desc %}
+                                <p class="lead">{{ item_desc }}</p>
+                                {% endif %}
+                                <div class="itemprice">&#8377; {{ qty }}</div>
+                                <label for="qty-1">Quantity: </label>
+                            <input type="number" min="0" max="100" id="qty" name="qty-1">
+                        </div>
+                        <button class="cartbuttons">Add to Cart</button>
+                        <!-- <div class="qtysold">{{ qty.0 }}</div> -->
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h1>:( No Results Found...</h1>
+        {% endif %}
+
+        <h1 class="rankingsHead">Top in all categories</h1>
+        <div class="items">
+            {% for item_name, qty in all_categories.items %}
+                <div class="item">
+                    <div class="pic">
+                        <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-head">{{ item_name }}</h2>
+                        {% if item_desc %}
+                            <p class="lead">{{ item_desc }}</p>
+                        {% endif %}
+                        <div class="qtysold">{{ qty.0 }}</div>
+                        <div class="itemprice">&#8377; {{ qty.1 }}</div>
+                        <label for="qty-1">Quantity: </label>
+                        <input type="number" min="0" max="100" id="qty" name="qty-1">
+                    </div>
+                    <button class="cartbuttons">Add to Cart</button>
+                    <!-- <div class="qtysold">{{ qty.0 }}</div> -->
+                </div>
+            {% endfor %}
+        </div>
+
+        <h1 class="rankingsHead">Top in Essential</h1>
+        <div class="items">
+            {% for item_name, qty in Essential.items %}
+                <div class="item">
+                    <div class="pic">
+                        <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-head">{{ item_name }}</h2>
+                        {% if item_desc %}
+                            <p class="lead">{{ item_desc }}</p>
+                        {% endif %}
+                        <div class="qtysold">{{ qty.0 }}</div>
+                        <div class="itemprice">&#8377; {{ qty.1 }}</div>
+                        <label for="qty-1">Quantity: </label>
+                        <input type="number" min="0" max="100" id="qty" name="qty-1">
+                    </div>
+                    <button class="cartbuttons">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h1 class="rankingsHead">Top in Electronics</h1>
+        <div class="items">
+            {% for item_name, qty in Electronics.items %}
+                <div class="item">
+                    <div class="pic">
+                        <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-head">{{ item_name }}</h2>
+                        {% if item_desc %}
+                            <p class="lead">{{ item_desc }}</p>
+                        {% endif %}
+                        <div class="qtysold">{{ qty.0 }}</div>
+                        <div class="itemprice">&#8377; {{ qty.1 }}</div>
+                        <label for="qty-1">Quantity: </label>
+                        <input type="number" min="0" max="100" id="qty" name="qty-1">
+                    </div>
+                    <button class="cartbuttons">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        
+        <h1 class="rankingsHead">Top in Misc</h1>
+        <div class="items">
+            {% for item_name, qty in Misc.items %}
+                <div class="item">
+                    <div class="pic">
+                        <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-head">{{ item_name }}</h2>
+                        {% if item_desc %}
+                            <p class="lead">{{ item_desc }}</p>
+                        {% endif %}
+                        <div class="qtysold">{{ qty.0 }}</div>
+                        <div class="itemprice">&#8377; {{ qty.1 }}</div>
+                        <label for="qty-1">Quantity: </label>
+                        <input type="number" min="0" max="100" id="qty" name="qty-1">
+                    </div>
+                    <button class="cartbuttons">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <h1 class="rankingsHead">Top in Luggage and Bags</h1>
+        <div class="items">
+            {% for item_name, qty in LuggageBags.items %}
+                <div class="item">
+                    <div class="pic">
+                        <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                    </div>
+                    <div class="item-body">
+                        <h2 class="item-head">{{ item_name }}</h2>
+                        {% if item_desc %}
+                            <p class="lead">{{ item_desc }}</p>
+                        {% endif %}
+                        <div class="qtysold">{{ qty.0 }}</div>
+                        <div class="itemprice">&#8377; {{ qty.1 }}</div>
+                        <label for="qty-1">Quantity: </label>
+                        <input type="number" min="0" max="100" id="qty" name="qty-1">
+                    </div>
+                    <button class="cartbuttons">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- <h1>Top Products in all Categories</h1>
+        <div class="items">
+            <div class="item">
+                <div class="pic">
+                    <img src="https://bit.ly/3jQgHxB" alt="shoe pic">
+                </div>
+                <div class="item-body">
+                    <h2 class="item-head">Nike Shoe(M)</h2>
+                    <p class="lead">Nike's popular shoes. Rock like a hero...</p>
+                    <label for="qty-1">Quantity: </label>
+                    <input type="number" min="0" max="100" id="qty" name="qty-1">
+                </div>
+                <button>Add to Cart</button>
+            </div>
+            <div class="item">
+                <div class="pic">
+                    <img src="https://bit.ly/3bmF95i" alt="toordal pic">
+                </div>
+                <div class="item-body">
+                    <h2 class="item-head">Toor dal (1kg)</h2>
+                    <p class="lead">High quality Toor Dal</p>
+                    <label for="qty-1">Quantity: </label>
+                    <input type="number" min="0" max="100" id="qty" name="qty-1">
+                </div>
+                <button>Add to Cart</button>
+            </div>
+        </div> -->
+
+    </section>
+{% endblock %}

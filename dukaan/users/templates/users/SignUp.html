@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'users/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{form.username.id_for_label}}">User Name: </label>
+        <span class="username">{{ form.username }}</span><br>
+        <label for="{{form.password1.id_for_label}}">Password: </label>
+        <span class="password">{{ form.password1 }}</span><br>
+        <label for="{{form.password2.id_for_label}}">Re-enter your password: </label>
+        <span class="password">{{ form.password2 }}</span><br>
+        <label for="{{form.email.id_for_label}}">Email: </label>
+        <span class="email">{{form.email }}</span><br>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

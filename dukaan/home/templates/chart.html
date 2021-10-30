@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {{ profit }}<hr>
+        {% for item in pending_payments %}
+            {{ item.user_id}}<br>
+            {{ item.payment_status }}<br>
+        {% endfor %}
+        <hr>
+    </div>
+    <!-- <div id="itemquantity">
+        [{% for item in list %}
+            '{{ item.quantity }}',
+        {% endfor %}]
+    </div> -->
+    <div id="itemquantity">{{ list }}</div>
+    <canvas id="myChart" width="800" height="200"></canvas> 
+    <script defer>
+        var ctx = document.getElementById('myChart');
+        <!-- var sales_full = {{ list }} -->
+        var sales = {{ list_by_month }}
+        
+        // alert(sales)
+
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'];
+
+        var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'sales',
+                        data: sales,
+                        fill: false,
+                    }]
+                }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+{% endblock %}
